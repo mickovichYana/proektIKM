@@ -2,47 +2,47 @@
 #include <string>
 using namespace std;
 
-// Функция для умножения двух чисел 
+// ╘єэъЎш  фы  єьэюцхэш  фтєї ўшёхы 
 string multiply(const string& a, int b) {
     int perenos = 0; 
     string result = "";
     for (int i = a.size() - 1; i >= 0; --i) {
-        int prod = (a[i] - '0') * b + perenos; // Умножение каждой цифры
+        int prod = (a[i] - '0') * b + perenos; // ╙ьэюцхэшх ърцфющ ЎшЇЁ√
         perenos = prod / 10; 
-        result.insert(result.begin(), (prod % 10) + '0'); // Добавляю к результату
+        result.insert(result.begin(), (prod % 10) + '0'); // ─юсрты ■ ъ Ёхчєы№ЄрЄє
     }
     while (perenos) {
-        result.insert(result.begin(), (perenos % 10) + '0'); // Добавляю перенос, если есть
+        result.insert(result.begin(), (perenos % 10) + '0'); // ─юсрты ■ яхЁхэюё, хёыш хёЄ№
         perenos /= 10; 
     }
     return result;
 }
 
-// Функция для вычисления a^m 
+// ╘єэъЎш  фы  т√ўшёыхэш  a^m 
 string power(int a, int m) {
     string result = "1"; 
     for (int i = 0; i < m; i++) {
-        result = multiply(result, a); // Умножаю текущее значение на a
+        result = multiply(result, a); // ╙ьэюцр■ Єхъє∙хх чэрўхэшх эр a
     }
     return result;
 }
 
-// Функция для сравнения больших чисел в виде строк
+// ╘єэъЎш  фы  ёЁртэхэш  сюы№°шї ўшёхы т тшфх ёЄЁюъ
 int compare(const string& a, const string& b) {
     if (a.size() != b.size()) {
-        return a.size() > b.size() ? 1 : -1; // Сравниваю длину
+        return a.size() > b.size() ? 1 : -1; // ╤Ёртэштр■ фышэє
     }
-    return a > b ? 1 : (a < b ? -1 : 0); // Сравниваю строки
+    return a > b ? 1 : (a < b ? -1 : 0); // ╤Ёртэштр■ ёЄЁюъш
 }
 
-// Функция для вычитания двух чисел в виде строк
+// ╘єэъЎш  фы  т√ўшЄрэш  фтєї ўшёхы т тшфх ёЄЁюъ
 string subtract(const string& a, const string& b) {
     string result = "";
     int borrow = 0; 
     int A = a.size();
     int B = b.size();
 
-    // Начинаю вычитание с конца строк
+    // ═рўшэр■ т√ўшЄрэшх ё ъюэЎр ёЄЁюъ
     for (int i = 0; i < A; ++i) {
         int digitA = a[A - 1 - i] - '0'; 
         int digitB = (i < B) ? b[B - 1 - i] - '0' : 0;
@@ -57,7 +57,7 @@ string subtract(const string& a, const string& b) {
         result.insert(result.begin(), diff + '0'); 
     }
 
-    // Удаляю возможные ведущие нули
+    // ╙фры ■ тючьюцэ√х тхфє∙шх эєыш
     while (result.size() > 1 && result[0] == '0') {
         result.erase(result.begin());
     }
@@ -68,9 +68,9 @@ int main() {
     int a, b;
     int m, n;
 
-    // Цикл для ввода a
+    // ╓шъы фы  ттюфр a
     while (true) {
-        cout << "Введите a (a <= 40000): ";
+        cout << "┬тхфшЄх a (a <= 40000): ";
         cin >> a;
         if (cin.good() && a >= 0 && a <= 40000 && cin.peek() == '\n') {
             break;
@@ -78,13 +78,13 @@ int main() {
         else {
             cin.clear();
             cin.ignore(10000, '\n');
-            cout << "Некорректный ввод. Пожалуйста, введите a снова." << endl;
+            cout << "═хъюЁЁхъЄэ√щ ттюф. ╧юцрыєщёЄр, ттхфшЄх a ёэютр." << endl;
         }
     }
 
-    // Цикл для ввода b
+    // ╓шъы фы  ттюфр b
     while (true) {
-        cout << "Введите b (b <= 40000): ";
+        cout << "┬тхфшЄх b (b <= 40000): ";
         cin >> b;
         if (cin.good() && b >= 0 && b <= 40000 && cin.peek() == '\n') {
             break;
@@ -92,13 +92,13 @@ int main() {
         else {
             cin.clear();
             cin.ignore(10000, '\n');
-            cout << "Некорректный ввод. Пожалуйста, введите b снова." << endl;
+            cout << "═хъюЁЁхъЄэ√щ ттюф. ╧юцрыєщёЄр, ттхфшЄх b ёэютр." << endl;
         }
     }
 
-    // Цикл для ввода m
+    // ╓шъы фы  ттюфр m
     while (true) {
-        cout << "Введите m (m <= 10): ";
+        cout << "┬тхфшЄх m (m <= 10): ";
         cin >> m;
         if (cin.good() && m >= 0 && m <= 10 && cin.peek() == '\n') {
             break;
@@ -106,13 +106,13 @@ int main() {
         else {
             cin.clear();
             cin.ignore(10000, '\n');
-            cout << "Некорректный ввод. Пожалуйста, введите m снова." << endl;
+            cout << "═хъюЁЁхъЄэ√щ ттюф. ╧юцрыєщёЄр, ттхфшЄх m ёэютр." << endl;
         }
     }
 
-    // Цикл для ввода n
+    // ╓шъы фы  ттюфр n
     while (true) {
-        cout << "Введите n (n <= 10): ";
+        cout << "┬тхфшЄх n (n <= 10): ";
         cin >> n;
         if (cin.good() && n >= 0 && n <= 10 && cin.peek() == '\n') {
             break;
@@ -120,29 +120,29 @@ int main() {
         else {
             cin.clear();
             cin.ignore(10000, '\n');
-            cout << "Некорректный ввод. Пожалуйста, введите n снова." << endl;
+            cout << "═хъюЁЁхъЄэ√щ ттюф. ╧юцрыєщёЄр, ттхфшЄх n ёэютр." << endl;
         }
     }
 
-    // Рассчитываю a^m и b^n
+    // ╨рёёўшЄ√тр■ a^m ш b^n
     string a_power_m = power(a, m);
     string b_power_n = power(b, n);
 
-    cout << "Результат a^m: " << a_power_m << endl;
-    cout << "Результат b^n: " << b_power_n << endl;
+    cout << "╨хчєы№ЄрЄ a^m: " << a_power_m << endl;
+    cout << "╨хчєы№ЄрЄ b^n: " << b_power_n << endl;
 
-    // Сравниваю и вывожу результат
+    // ╤Ёртэштр■ ш т√тюцє Ёхчєы№ЄрЄ
     int comparison = compare(a_power_m, b_power_n);
     if (comparison > 0) {
         string difference = subtract(a_power_m, b_power_n);
-        cout << a_power_m << " больше " << b_power_n << " на " << difference << endl;
+        cout << a_power_m << " сюы№°х " << b_power_n << " эр " << difference << endl;
     }
     else if (comparison < 0) {
         string difference = subtract(b_power_n, a_power_m);
-        cout << b_power_n << " больше " << a_power_m << " на " << difference << endl;
+        cout << b_power_n << " сюы№°х " << a_power_m << " эр " << difference << endl;
     }
     else {
-        cout << "a^m и b^n равны " << a_power_m << endl;
+        cout << "a^m ш b^n Ёртэ√ " << a_power_m << endl;
     }
 
     return 0;
