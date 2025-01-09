@@ -1,4 +1,4 @@
-Ôªø#include "Header.h"
+#include "Header.h"
 #include <string>
 using namespace std; 
 
@@ -6,12 +6,12 @@ string multiply(const string& a, int b) {
     int perenos = 0;
     string result = "";
     for (int i = a.size() - 1; i >= 0; --i) {
-        int prod = (a[i] - '0') * b + perenos; // –£–º–Ω–æ–∂–µ–Ω–∏–µ –∫–∞–∂–¥–æ–π —Ü–∏—Ñ—Ä—ã
+        int prod = (a[i] - '0') * b + perenos; // ì¨≠Æ¶•≠®• ™†¶§Æ© Ê®‰‡Î
         perenos = prod / 10;
-        result.insert(result.begin(), (prod % 10) + '0');// –î–æ–±–∞–≤–ª—è—é –∫ —Ä–µ–∑—É–ª—å—Ç–∞—Ç—É
+        result.insert(result.begin(), (prod % 10) + '0');// ÑÆ°†¢´ÔÓ ™ ‡•ß„´Ï‚†‚„
     }
     while (perenos) {
-        result.insert(result.begin(), (perenos % 10) + '0');// –î–æ–±–∞–≤–ª—è—é –ø–µ—Ä–µ–Ω–æ—Å, –µ—Å–ª–∏ –µ—Å—Ç—å
+        result.insert(result.begin(), (perenos % 10) + '0');// ÑÆ°†¢´ÔÓ Ø•‡•≠Æ·, •·´® •·‚Ï
         perenos /= 10;
     }
     return result;
@@ -20,16 +20,16 @@ string multiply(const string& a, int b) {
 string power(int a, int m) {
     string result = "1";
     for (int i = 0; i < m; i++) {
-        result = multiply(result, a); // –£–º–Ω–æ–∂–∞—é —Ç–µ–∫—É—â–µ–µ –∑–Ω–∞—á–µ–Ω–∏–µ –Ω–∞ a
+        result = multiply(result, a); // ì¨≠Æ¶†Ó ‚•™„È•• ß≠†Á•≠®• ≠† a
     }
     return result;
 }
 
 int compare(const string& a, const string& b) {
     if (a.size() != b.size()) {
-        return a.size() > b.size() ? 1 : -1;// –°—Ä–∞–≤–Ω–∏–≤–∞—é –¥–ª–∏–Ω—É
+        return a.size() > b.size() ? 1 : -1;// ë‡†¢≠®¢†Ó §´®≠„
     }
-    return a > b ? 1 : (a < b ? -1 : 0);// –°—Ä–∞–≤–Ω–∏–≤–∞—é —Å—Ç—Ä–æ–∫–∏
+    return a > b ? 1 : (a < b ? -1 : 0);// ë‡†¢≠®¢†Ó ·‚‡Æ™®
 }
 
 string subtract(const string& a, const string& b) {
@@ -38,7 +38,7 @@ string subtract(const string& a, const string& b) {
     int A = a.size();
     int B = b.size();
 
-    for (int i = 0; i < A; ++i) {// –ù–∞—á–∏–Ω–∞—é –≤—ã—á–∏—Ç–∞–Ω–∏–µ —Å –∫–æ–Ω—Ü–∞ —Å—Ç—Ä–æ–∫
+    for (int i = 0; i < A; ++i) {// ç†Á®≠†Ó ¢ÎÁ®‚†≠®• · ™Æ≠Ê† ·‚‡Æ™
         int digitA = a[A - 1 - i] - '0';
         int digitB = (i < B) ? b[B - 1 - i] - '0' : 0;
         int diff = digitA - digitB - borrow;
@@ -52,7 +52,7 @@ string subtract(const string& a, const string& b) {
         result.insert(result.begin(), diff + '0');
     }
 
-    // –£–¥–∞–ª—è—é –≤–æ–∑–º–æ–∂–Ω—ã–µ –≤–µ–¥—É—â–∏–µ –Ω—É–ª–∏
+    // ì§†´ÔÓ ¢Æß¨Æ¶≠Î• ¢•§„È®• ≠„´®
     while (result.size() > 1 && result[0] == '0') {
         result.erase(result.begin());
     }

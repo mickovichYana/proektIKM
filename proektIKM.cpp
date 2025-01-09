@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include "Header.h"
 using namespace std;
@@ -9,7 +9,7 @@ int main() {
 
     // Цикл для ввода a
     while (true) {
-        cout << "Введите a (a <= 40000): ";
+        cout << "Введите a (0<= a <= 40000): ";
         cin >> a;
         if (cin.good() && a >= 0 && a <= 40000 && cin.peek() == '\n') {
             break;
@@ -23,7 +23,7 @@ int main() {
 
     // Цикл для ввода b
     while (true) {
-        cout << "Введите b (b <= 40000): ";
+        cout << "Введите b (0<= b <= 40000): ";
         cin >> b;
         if (cin.good() && b >= 0 && b <= 40000 && cin.peek() == '\n') {
             break;
@@ -37,7 +37,7 @@ int main() {
 
     // Цикл для ввода m
     while (true) {
-        cout << "Введите m (m <= 10): ";
+        cout << "Введите m (0<= m <= 10): ";
         cin >> m;
         if (cin.good() && m >= 0 && m <= 10 && cin.peek() == '\n') {
             break;
@@ -51,7 +51,7 @@ int main() {
 
     // Цикл для ввода n
     while (true) {
-        cout << "Введите n (n <= 10): ";
+        cout << "Введите n (0<= n <= 10): ";
         cin >> n;
         if (cin.good() && n >= 0 && n <= 10 && cin.peek() == '\n') {
             break;
