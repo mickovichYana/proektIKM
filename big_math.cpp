@@ -1,4 +1,4 @@
-#include "Header.h"
+п»ї#include "Header.h"
 #include <string>
 using namespace std; 
 
@@ -6,12 +6,12 @@ string multiply(const string& a, int b) {
     int perenos = 0;
     string result = "";
     for (int i = a.size() - 1; i >= 0; --i) {
-        int prod = (a[i] - '0') * b + perenos; // Умножение каждой цифры
+        int prod = (a[i] - '0') * b + perenos; // РЈРјРЅРѕР¶РµРЅРёРµ РєР°Р¶РґРѕР№ С†РёС„СЂС‹
         perenos = prod / 10;
-        result.insert(result.begin(), (prod % 10) + '0');// Добавляю к результату
+        result.insert(result.begin(), (prod % 10) + '0');// Р”РѕР±Р°РІР»СЏСЋ Рє СЂРµР·СѓР»СЊС‚Р°С‚Сѓ
     }
     while (perenos) {
-        result.insert(result.begin(), (perenos % 10) + '0');// Добавляю перенос, если есть
+        result.insert(result.begin(), (perenos % 10) + '0');// Р”РѕР±Р°РІР»СЏСЋ РїРµСЂРµРЅРѕСЃ, РµСЃР»Рё РµСЃС‚СЊ
         perenos /= 10;
     }
     return result;
@@ -20,16 +20,16 @@ string multiply(const string& a, int b) {
 string power(int a, int m) {
     string result = "1";
     for (int i = 0; i < m; i++) {
-        result = multiply(result, a); // Умножаю текущее значение на a
+        result = multiply(result, a); // РЈРјРЅРѕР¶Р°СЋ С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РЅР° a
     }
     return result;
 }
 
 int compare(const string& a, const string& b) {
     if (a.size() != b.size()) {
-        return a.size() > b.size() ? 1 : -1;// Сравниваю длину
+        return a.size() > b.size() ? 1 : -1;// РЎСЂР°РІРЅРёРІР°СЋ РґР»РёРЅСѓ
     }
-    return a > b ? 1 : (a < b ? -1 : 0);// Сравниваю строки
+    return a > b ? 1 : (a < b ? -1 : 0);// РЎСЂР°РІРЅРёРІР°СЋ СЃС‚СЂРѕРєРё
 }
 
 string subtract(const string& a, const string& b) {
@@ -38,7 +38,7 @@ string subtract(const string& a, const string& b) {
     int A = a.size();
     int B = b.size();
 
-    for (int i = 0; i < A; ++i) {// Начинаю вычитание с конца строк
+    for (int i = 0; i < A; ++i) {// РќР°С‡РёРЅР°СЋ РІС‹С‡РёС‚Р°РЅРёРµ СЃ РєРѕРЅС†Р° СЃС‚СЂРѕРє
         int digitA = a[A - 1 - i] - '0';
         int digitB = (i < B) ? b[B - 1 - i] - '0' : 0;
         int diff = digitA - digitB - borrow;
@@ -52,7 +52,7 @@ string subtract(const string& a, const string& b) {
         result.insert(result.begin(), diff + '0');
     }
 
-    // Удаляю возможные ведущие нули
+    // РЈРґР°Р»СЏСЋ РІРѕР·РјРѕР¶РЅС‹Рµ РІРµРґСѓС‰РёРµ РЅСѓР»Рё
     while (result.size() > 1 && result[0] == '0') {
         result.erase(result.begin());
     }
