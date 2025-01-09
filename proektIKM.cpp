@@ -1,95 +1,150 @@
-ï»¿#include <iostream>
-using namespace std; 
+#include <iostream>
+#include <string>
+using namespace std;
 
-// Ğ¤ÑƒĞ½ĞºÑ†Ğ¸Ñ Ğ´Ğ»Ñ Ğ²Ñ‹Ñ‡Ğ¸ÑĞ»ĞµĞ½Ğ¸Ñ a^m 
-unsigned long long power(int a, int m) {
-    if (m == 0) { // Ğ›ÑĞ±Ğ¾Ğµ Ñ‡Ğ¸ÑĞ»Ğ¾ Ğ² ÑÑ‚ĞµĞ¿ĞµĞ½Ğ¸ 0 = 1
-        return 1; 
+// ”ã­ªæ¨ï ¤«ï ã¬­®¦¥­¨ï ¤¢ãå ç¨á¥« 
+string multiply(const string& a, int b) {
+    int perenos = 0; 
+    string result = "";
+    for (int i = a.size() - 1; i >= 0; --i) {
+        int prod = (a[i] - '0') * b + perenos; // “¬­®¦¥­¨¥ ª ¦¤®© æ¨äàë
+        perenos = prod / 10; 
+        result.insert(result.begin(), (prod % 10) + '0'); // „®¡ ¢«ïî ª à¥§ã«ìâ âã
+    }
+    while (perenos) {
+        result.insert(result.begin(), (perenos % 10) + '0'); // „®¡ ¢«ïî ¯¥à¥­®á, ¥á«¨ ¥áâì
+        perenos /= 10; 
+    }
+    return result;
+}
+
+// ”ã­ªæ¨ï ¤«ï ¢ëç¨á«¥­¨ï a^m 
+string power(int a, int m) {
+    string result = "1"; 
+    for (int i = 0; i < m; i++) {
+        result = multiply(result, a); // “¬­®¦ î â¥ªãé¥¥ §­ ç¥­¨¥ ­  a
+    }
+    return result;
+}
+
+// ”ã­ªæ¨ï ¤«ï áà ¢­¥­¨ï ¡®«ìè¨å ç¨á¥« ¢ ¢¨¤¥ áâà®ª
+int compare(const string& a, const string& b) {
+    if (a.size() != b.size()) {
+        return a.size() > b.size() ? 1 : -1; // ‘à ¢­¨¢ î ¤«¨­ã
+    }
+    return a > b ? 1 : (a < b ? -1 : 0); // ‘à ¢­¨¢ î áâà®ª¨
+}
+
+// ”ã­ªæ¨ï ¤«ï ¢ëç¨â ­¨ï ¤¢ãå ç¨á¥« ¢ ¢¨¤¥ áâà®ª
+string subtract(const string& a, const string& b) {
+    string result = "";
+    int borrow = 0; 
+    int A = a.size();
+    int B = b.size();
+
+    //  ç¨­ î ¢ëç¨â ­¨¥ á ª®­æ  áâà®ª
+    for (int i = 0; i < A; ++i) {
+        int digitA = a[A - 1 - i] - '0'; 
+        int digitB = (i < B) ? b[B - 1 - i] - '0' : 0;
+        int diff = digitA - digitB - borrow; 
+        if (diff < 0) {
+            diff += 10; 
+            borrow = 1; 
+        }
+        else {
+            borrow = 0;
+        }
+        result.insert(result.begin(), diff + '0'); 
     }
 
-    unsigned long long result = 1; 
-    for (int i = 0; i < m; i++) { 
-        result *= a;
+    // “¤ «ïî ¢®§¬®¦­ë¥ ¢¥¤ãé¨¥ ­ã«¨
+    while (result.size() > 1 && result[0] == '0') {
+        result.erase(result.begin());
     }
-    return result; 
+    return result.empty() ? "0" : result; 
 }
 
 int main() {
-    int a, b; 
-    int m, n; 
+    int a, b;
+    int m, n;
 
-    // Ğ¦Ğ¸ĞºĞ» Ğ´Ğ»Ñ Ğ²Ğ²Ğ¾Ğ´Ğ° a
+    // –¨ª« ¤«ï ¢¢®¤  a
     while (true) {
-        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ a (a <= 40000): "; 
-        cin >> a; 
+        cout << "‚¢¥¤¨â¥ a (a <= 40000): ";
+        cin >> a;
         if (cin.good() && a >= 0 && a <= 40000 && cin.peek() == '\n') {
             break;
         }
         else {
-            cin.clear(); // Ğ¡Ğ±Ñ€Ğ°ÑÑ‹Ğ²Ğ°Ñ Ñ„Ğ»Ğ°Ğ³ Ğ¾ÑˆĞ¸Ğ±ĞºĞ¸
-            cin.ignore(10000, '\n'); // Ğ˜Ğ³Ğ½Ğ¾Ñ€Ğ¸Ñ€ÑƒÑ Ğ½ĞµĞ¿Ñ€Ğ°Ğ²Ğ¸Ğ»ÑŒĞ½Ñ‹Ğ¹ Ğ²Ğ²Ğ¾Ğ´
-            cout << "ĞĞµĞºĞ¾Ñ€Ñ€ĞµĞºÑ‚Ğ½Ñ‹Ğ¹ Ğ²Ğ²Ğ¾Ğ´. ĞŸĞ¾Ğ¶Ğ°Ğ»ÑƒĞ¹ÑÑ‚Ğ°, Ğ²Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ a ÑĞ½Ğ¾Ğ²Ğ°." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "¥ª®àà¥ªâ­ë© ¢¢®¤. ®¦ «ã©áâ , ¢¢¥¤¨â¥ a á­®¢ ." << endl;
         }
     }
 
-    // Ğ¦Ğ¸ĞºĞ» Ğ´Ğ»Ñ Ğ²Ğ²Ğ¾Ğ´Ğ° b
+    // –¨ª« ¤«ï ¢¢®¤  b
     while (true) {
-        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ b (b <= 40000): "; 
-        cin >> b; 
+        cout << "‚¢¥¤¨â¥ b (b <= 40000): ";
+        cin >> b;
         if (cin.good() && b >= 0 && b <= 40000 && cin.peek() == '\n') {
             break;
         }
         else {
-            cin.clear(); 
-            cin.ignore(10000, '\n'); 
-            cout << "ĞĞµĞºĞ¾Ñ€Ñ€ĞµĞºÑ‚Ğ½Ñ‹Ğ¹ Ğ²Ğ²Ğ¾Ğ´. ĞŸĞ¾Ğ¶Ğ°Ğ»ÑƒĞ¹ÑÑ‚Ğ°, Ğ²Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ b ÑĞ½Ğ¾Ğ²Ğ°." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "¥ª®àà¥ªâ­ë© ¢¢®¤. ®¦ «ã©áâ , ¢¢¥¤¨â¥ b á­®¢ ." << endl;
         }
     }
 
-    // Ğ¦Ğ¸ĞºĞ» Ğ´Ğ»Ñ Ğ²Ğ²Ğ¾Ğ´Ğ° m
+    // –¨ª« ¤«ï ¢¢®¤  m
     while (true) {
-        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ m (m <= 10): "; 
-        cin >> m; 
+        cout << "‚¢¥¤¨â¥ m (m <= 10): ";
+        cin >> m;
         if (cin.good() && m >= 0 && m <= 10 && cin.peek() == '\n') {
             break;
         }
         else {
-            cin.clear(); 
-            cin.ignore(10000, '\n'); 
-            cout << "ĞĞµĞºĞ¾Ñ€Ñ€ĞµĞºÑ‚Ğ½Ñ‹Ğ¹ Ğ²Ğ²Ğ¾Ğ´. ĞŸĞ¾Ğ¶Ğ°Ğ»ÑƒĞ¹ÑÑ‚Ğ°, Ğ²Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ m ÑĞ½Ğ¾Ğ²Ğ°." << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "¥ª®àà¥ªâ­ë© ¢¢®¤. ®¦ «ã©áâ , ¢¢¥¤¨â¥ m á­®¢ ." << endl;
         }
     }
 
-    // Ğ¦Ğ¸ĞºĞ» Ğ´Ğ»Ñ Ğ²Ğ²Ğ¾Ğ´Ğ° n
+    // –¨ª« ¤«ï ¢¢®¤  n
     while (true) {
-        cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ n (n <= 10): "; 
-        cin >> n; 
+        cout << "‚¢¥¤¨â¥ n (n <= 10): ";
+        cin >> n;
         if (cin.good() && n >= 0 && n <= 10 && cin.peek() == '\n') {
             break;
         }
         else {
             cin.clear();
             cin.ignore(10000, '\n');
-            cout << "ĞĞµĞºĞ¾Ñ€Ñ€ĞµĞºÑ‚Ğ½Ñ‹Ğ¹ Ğ²Ğ²Ğ¾Ğ´. ĞŸĞ¾Ğ¶Ğ°Ğ»ÑƒĞ¹ÑÑ‚Ğ°, Ğ²Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ n ÑĞ½Ğ¾Ğ²Ğ°." << endl;
+            cout << "¥ª®àà¥ªâ­ë© ¢¢®¤. ®¦ «ã©áâ , ¢¢¥¤¨â¥ n á­®¢ ." << endl;
         }
     }
 
-    // Ğ Ğ°ÑÑÑ‡Ğ¸Ñ‚Ñ‹Ğ²Ğ°Ñ a^m Ğ¸ b^n
-    unsigned long long a_power_m = power(a, m);
-    unsigned long long b_power_n = power(b, n);
-    cout << "Ğ ĞµĞ·ÑƒĞ»ÑŒÑ‚Ğ°Ñ‚ a^m: " << a_power_m << endl;
-    cout << "Ğ ĞµĞ·ÑƒĞ»ÑŒÑ‚Ğ°Ñ‚ b^n: " << b_power_n << endl;
+    //  ááç¨âë¢ î a^m ¨ b^n
+    string a_power_m = power(a, m);
+    string b_power_n = power(b, n);
 
-    // Ğ¡Ñ€Ğ°Ğ²Ğ½Ğ¸Ğ²Ğ°Ñ Ğ¸ Ğ²Ñ‹Ğ²Ğ¾Ğ¶Ñƒ Ñ€ĞµĞ·ÑƒĞ»ÑŒÑ‚Ğ°Ñ‚
-    if (a_power_m > b_power_n) {
-        cout << a_power_m << " Ğ±Ğ¾Ğ»ÑŒÑˆĞµ " << b_power_n << " Ğ½Ğ° " << (a_power_m - b_power_n) << endl;
+    cout << "¥§ã«ìâ â a^m: " << a_power_m << endl;
+    cout << "¥§ã«ìâ â b^n: " << b_power_n << endl;
+
+    // ‘à ¢­¨¢ î ¨ ¢ë¢®¦ã à¥§ã«ìâ â
+    int comparison = compare(a_power_m, b_power_n);
+    if (comparison > 0) {
+        string difference = subtract(a_power_m, b_power_n);
+        cout << a_power_m << " ¡®«ìè¥ " << b_power_n << " ­  " << difference << endl;
     }
-    else if (a_power_m < b_power_n) {
-        cout << b_power_n << " Ğ±Ğ¾Ğ»ÑŒÑˆĞµ " << a_power_m << " Ğ½Ğ° " << (b_power_n - a_power_m) << endl;
+    else if (comparison < 0) {
+        string difference = subtract(b_power_n, a_power_m);
+        cout << b_power_n << " ¡®«ìè¥ " << a_power_m << " ­  " << difference << endl;
     }
     else {
-        cout << "a^m Ğ¸ b^n Ñ€Ğ°Ğ²Ğ½Ñ‹ " << a_power_m << endl; 
+        cout << "a^m ¨ b^n à ¢­ë " << a_power_m << endl;
     }
 
-    return 0; 
+    return 0;
 }
+
